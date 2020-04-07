@@ -40,7 +40,7 @@ void Transpose(Matrix* a, Matrix* b)
 	b[0].Value = a[0].Value;
 
 	/*0이 아닌 원소가 있는 경우에만 전치연산 수행.*/
-	if(a[0].Value > 0)
+	if(a[0].Value != 0)
 	{
 		/*희소 행렬 a의 열별로 전치 반복 수행.*/
 		for (int i=0;i<a[0].Column;i++)
