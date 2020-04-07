@@ -1,4 +1,4 @@
-#pragma warning(disable:4996) // Disable CRT_SECURE_NO_WARNING error.
+#pragma warning(disable:4996) // Disable CRT_SECURE_WARNING error.
 #include <stdio.h> // For console input output header.
 #include <malloc.h> // For dynamic memory allocation.
 
@@ -17,44 +17,44 @@
  */
 typedef struct FMatrix
 {
-	int Row; ///< Çà
-	int Column; ///< ¿­
-	int Value; ///< °ª
+	int Row; ///< í–‰
+	int Column; ///< ì—´
+	int Value; ///< ê°’
 }*PMatrix, Matrix;
 
 /**
- * @brief ÀüÄ¡Çà·Ä ¼öÇà ¸Ş¼­µå
- * @param a : ¹Ù²ğ Çà·Ä a
- * @param b : ¹Ù²ğ Çà·Ä b
- * O(column * (column * rows)) => column = nÀÌ¶ó°í Ä¡È¯
- *													 rows = mÀÌ¶ó°í Ä¡È¯
- *													 ÀÏ¶§
+ * @brief ì „ì¹˜í–‰ë ¬ ìˆ˜í–‰ ë©”ì„œë“œ
+ * @param a : ë°”ë€” í–‰ë ¬ a
+ * @param b : ë°”ë€” í–‰ë ¬ b
+ * O(column * (column * rows)) => column = nì´ë¼ê³  ì¹˜í™˜
+ *													 rows = mì´ë¼ê³  ì¹˜í™˜
+ *													 ì¼ë•Œ
  *	BigO : O(n^2 * m)
  */
 void Transpose(Matrix* a, Matrix* b)
 {
-	int current = 1; ///< ÇöÀç ¹Ù²ğ ¿ø¼ÒÀÇ ÀÎµ¦½º. 1¹øºÎÅÍ ¹Ù²î´Â ÀÌÀ¯´Â 0¹ø ÀÎµ¦½º´Â ÇÇ¹ş¶óÀÎ¿¡ ÀÖ±â ¶§¹®¿¡ ¹Ù²îÁö ¾Ê¾Æ¼­ 1¹øºÎÅÍ ¿¬»êÀ» ¼öÇàÇÑ´Ù.
+	int current = 1; ///< í˜„ì¬ ë°”ë€” ì›ì†Œì˜ ì¸ë±ìŠ¤. 1ë²ˆë¶€í„° ë°”ë€ŒëŠ” ì´ìœ ëŠ” 0ë²ˆ ì¸ë±ìŠ¤ëŠ” í”¼ë²—ë¼ì¸ì— ìˆê¸° ë•Œë¬¸ì— ë°”ë€Œì§€ ì•Šì•„ì„œ 1ë²ˆë¶€í„° ì—°ì‚°ì„ ìˆ˜í–‰í•œë‹¤.
 	
-	/*ÀüÄ¡Çà·ÄÀ» ¼öÇàÇØ Çà°ú ¿­À» ±³È¯.*/
+	/*ì „ì¹˜í–‰ë ¬ì„ ìˆ˜í–‰í•´ í–‰ê³¼ ì—´ì„ êµí™˜.*/
 	b[0].Column = a[0].Row;
 	b[0].Row = a[0].Column;
 	b[0].Value = a[0].Value;
 
-	/*0ÀÌ ¾Æ´Ñ ¿ø¼Ò°¡ ÀÖ´Â °æ¿ì¿¡¸¸ ÀüÄ¡¿¬»ê ¼öÇà.*/
+	/*0ì´ ì•„ë‹Œ ì›ì†Œê°€ ìˆëŠ” ê²½ìš°ì—ë§Œ ì „ì¹˜ì—°ì‚° ìˆ˜í–‰.*/
 	if(a[0].Value > 0)
 	{
-		/*Èñ¼Ò Çà·Ä aÀÇ ¿­º°·Î ÀüÄ¡ ¹İº¹ ¼öÇà.*/
+		/*í¬ì†Œ í–‰ë ¬ aì˜ ì—´ë³„ë¡œ ì „ì¹˜ ë°˜ë³µ ìˆ˜í–‰.*/
 		for (int i=0;i<a[0].Column;i++)
 		{
-			/*Èñ¼ÒÇà·ÄaÀÇ ¿ø¼Ò ¼ö°¡ 0ÀÌ ¾Æ´Ò‹š ¹İº¹ ¼öÇà.*/
+			/*í¬ì†Œí–‰ë ¬aì˜ ì›ì†Œ ìˆ˜ê°€ 0ì´ ì•„ë‹Â‹Âš ë°˜ë³µ ìˆ˜í–‰.*/
 			for (int j = 1; j<=a[0].Value;j++)
 			{
-				/*ÇöÀç ¿­¿¡ ¼ÓÇÏ´Â ¿ø¼Ò°¡ ÀÖÀ¸¸é b¿¡ »ğÀÔ.*/
+				/*í˜„ì¬ ì—´ì— ì†í•˜ëŠ” ì›ì†Œê°€ ìˆìœ¼ë©´ bì— ì‚½ì….*/
 				if(a[j].Column == i)
 				{
 					/*
-					 * ¿ø¼Ò Swap
-					 * ÀüÄ¡¿¬»ê ¼öÇà
+					 * ì›ì†Œ Swap
+					 * ì „ì¹˜ì—°ì‚° ìˆ˜í–‰
 					 */
 					b[current].Row = a[j].Column;
 					b[current].Column = a[j].Row;
@@ -82,23 +82,23 @@ int main()
 		{5,6,6},
 		{6,0,52},
 		{7,4,11}
-	}; ///<ÀüÄ¡Çà¿­À» À§ÇÑ µ¥ÀÌÅÍ¸¦ ÀÓÀÇ·Î ¼³Á¤.
+	}; ///<ì „ì¹˜í–‰ì—´ì„ ìœ„í•œ ë°ì´í„°ë¥¼ ì„ì˜ë¡œ ì„¤ì •.
 	
-	Matrix* swapMatrix = nullptr; ///< ÀüÄ¡Çà¿­ÀÌ ³¡³­ µ¥ÀÌÅÍ°¡ ÀúÀåµÉ º¯¼ö.
+	Matrix* swapMatrix = nullptr; ///< ì „ì¹˜í–‰ì—´ì´ ëë‚œ ë°ì´í„°ê°€ ì €ì¥ë  ë³€ìˆ˜.
 	swapMatrix = (Matrix*)malloc( sizeof(Matrix) * MATRIX_DATA_SIZE ); // Set memory dynamically.
 
-	Transpose(originalMatrix, swapMatrix); // ÀüÄ¡¿¬»êÀ» ¼öÇà.
+	Transpose(originalMatrix, swapMatrix); // ì „ì¹˜ì—°ì‚°ì„ ìˆ˜í–‰.
 
 	/*Show Result.*/	
 	for (int i = 0;i<MATRIX_DATA_SIZE;i++)
 	{
-		printf("Çà : %d\t¿­ : %d\t0ÀÌ ¾Æ´Ñ Ç× : %d\n", 
+		printf("í–‰ : %d\tì—´ : %d\t0ì´ ì•„ë‹Œ í•­ : %d\n", 
 			originalMatrix[i].Row, originalMatrix[i].Column, originalMatrix[i].Value);		
 	}
 	printf("\n\n");
 	for (int i = 0; i < MATRIX_DATA_SIZE; i++)
 	{
-		printf("Çà : %d\t¿­ : %d\t0ÀÌ ¾Æ´Ñ Ç× : %d\n", swapMatrix[i].Row, swapMatrix[i].Column, swapMatrix[i].Value);
+		printf("í–‰ : %d\tì—´ : %d\t0ì´ ì•„ë‹Œ í•­ : %d\n", swapMatrix[i].Row, swapMatrix[i].Column, swapMatrix[i].Value);
 	}
 
 	/*
