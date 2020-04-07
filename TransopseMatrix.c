@@ -27,8 +27,7 @@ typedef struct FMatrix
  * @param a : 바뀔 행렬 a
  * @param b : 바뀔 행렬 b
  * O(column * (column * rows)) => column = n이라고 치환
- *													 rows = m이라고 치환
- *													 일때
+ *					rows = m이라고 치환
  *	BigO : O(n^2 * m)
  */
 void Transpose(Matrix* a, Matrix* b)
